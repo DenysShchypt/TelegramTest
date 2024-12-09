@@ -4,7 +4,7 @@ from utils.jwt_token import create_access_token,decode_access_token
 from database import users_collection
 from temp_storage import temp_storage
 async def register_user(user):
-    existing_user = await users_collection.find_one({"username": user.username})
+    existing_user = await users_collection.find_one({"email": user.email})
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
     
@@ -23,7 +23,7 @@ async def register_user(user):
     return {"user": serialize_user(new_user), "access_token": access_token}
 
 async def login_user(user):
-    db_user = await users_collection.find_one({"username": user.username})
+    db_user = await users_collection.find_one({"email": user.email})
     if not db_user:
         raise HTTPException(status_code=400, detail="Invalid username or password")
     
