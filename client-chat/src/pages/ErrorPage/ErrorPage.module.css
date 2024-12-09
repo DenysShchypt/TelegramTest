@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light");
+
+html {
+  font-size: 16px;
+  font-family: "Shadows Into Light", cursive;
+}
+body {
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: var(--secondary-background-color);
+  color: var(--main-text-white);
+}
+.a_title {
+  font-size: 10rem;
+  text-align: center;
+}
+.a_message {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.o_cat {
+  width: 35vh;
+  margin: auto;
+  padding: 3rem;
+}
+.m_ear,
+.m_eye {
+  background-color: var(--main-text-white);
+}
+.m_ears {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 1vh 0.5vh;
+  z-index: 1;
+}
+.m_ear {
+  height: 14vh;
+  width: 10vh;
+  border-radius: 40% 70% 10% 10% e("/") 100% 100% 10% 10%;
+  position: relative;
+
+  &._left {
+    transform: rotateZ(15deg);
+  }
+  &._right {
+    transform: rotateY(180deg) rotateZ(15deg);
+  }
+  &:after,
+  &:before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    background-color: var(--secondary-background-color);
+    bottom: 0;
+    right: 70%;
+    border-radius: 50%;
+  }
+  &:after {
+    height: 40%;
+    transform: rotate(15deg);
+  }
+  &:before {
+    height: 35%;
+    transform: rotate(-15deg);
+  }
+}
+.m_face {
+  position: relative;
+  background-color: var(--secondary-background-color);
+  border-radius: 100% 100% 0 0;
+  margin: -8vh auto 0;
+  padding: 8vh 0 6vh;
+  width: 90%;
+}
+.m_eyes {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+}
+.m_eye {
+  width: 10vh;
+  height: 8vh;
+  border-radius: 70%;
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    height: 50%;
+    left: -2vh;
+    right: -2vh;
+    background-color: var(--secondary-background-color);
+    border-radius: 0 0 35% 35%;
+    z-index: 2;
+    animation: eyes 5s ease infinite;
+  }
+  &:after {
+    content: "";
+    width: 10%;
+    height: 15%;
+    border-radius: 50%;
+    background-color: var(--main-text-white);
+    position: absolute;
+    top: 40%;
+  }
+  &.-left:after {
+    right: -5%;
+  }
+  &.-right:after {
+    left: -5%;
+  }
+}
+.a_eyePupil {
+  background-color: var(--secondary-background-color);
+  width: 30%;
+  left: 35%;
+  &,
+  &:after {
+    position: absolute;
+
+    height: 50%;
+    border-radius: 50%;
+    top: 25%;
+  }
+
+  &:after {
+    content: "";
+    background-color: var(--main-text-white);
+    width: 20%;
+    left: 20%;
+  }
+}
+
+.m_nose {
+  border-radius: 50% 50% 50% 50% e("/") 30% 30% 70% 70%;
+  background-color: var(--main-text-white);
+  width: 4vh;
+  height: 2vh;
+  margin: auto;
+}
+
+@keyframes eyes {
+  0%,
+  5%,
+  100% {
+    height: 50%;
+  }
+  2% {
+    height: 110%;
+  }
+}
