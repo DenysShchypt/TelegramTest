@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '../../common/types/auth';
-import { loginUser, logout, registerUser } from './auth.thunks';
+import { loginUser, logout, refreshUser, registerUser } from './auth.thunks';
 
 const initialState: IAuthState = {
   user: {
@@ -47,6 +47,17 @@ const authSlice = createSlice({
         return initialState;
       })
       .addCase(logout.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(refreshUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshUser.fulfilled, (state) => {
+        // state.user = action.payload;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+      })
+      .addCase(refreshUser.rejected, (state) => {
         state.isLoading = false;
       });
   },

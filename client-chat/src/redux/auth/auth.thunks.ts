@@ -6,14 +6,13 @@ import {
   IPublicUser,
 } from '../../common/types/auth';
 import { IError } from '../../common/types/errors';
-import axios from 'axios';
 
 const setAuthHeader = (token: string) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
+  instance.defaults.headers.common.Authorization = '';
 };
 
 export const registerUser = createAsyncThunk<
@@ -23,8 +22,8 @@ export const registerUser = createAsyncThunk<
 >('users/register', async (data: IFormDataRegister, { rejectWithValue }) => {
   try {
     const resRegisterUser = await instance.post('users/register', data);
-    console.log(resRegisterUser.data.user);
     setAuthHeader(resRegisterUser.data.access_token);
+    localStorage.setItem('tokenTelegram', resRegisterUser.data.access_token);
     return resRegisterUser.data.user;
   } catch (error) {
     const typedError = error as IError;
@@ -45,6 +44,7 @@ export const loginUser = createAsyncThunk<
   try {
     const resRegisterUser = await instance.post('users/login', data);
     setAuthHeader(resRegisterUser.data.access_token);
+    localStorage.setItem('tokenTelegram', resRegisterUser.data.access_token);
     return resRegisterUser.data.user;
   } catch (error) {
     const typedError = error as IError;
@@ -62,6 +62,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
   async (_, { rejectWithValue }) => {
     try {
       await instance.post('users/logout');
+      localStorage.setItem('tokenTelegram', '');
       clearAuthHeader();
     } catch (error) {
       const typedError = error as IError;
@@ -77,3 +78,30 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     }
   }
 );
+
+export const refreshUser = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: string }
+>('users/refresh', async (_, { rejectWithValue }) => {
+  try {
+    const token = localStorage.getItem('tokenTelegram');
+    if (!token) {
+      return rejectWithValue('No token found. Please log in.');
+    }
+    setAuthHeader(token);
+    return;
+    // const res = await instance.get('/users/me');
+    // return res.data.user;
+  } catch (error) {
+    const typedError = error as IError;
+
+    if (typedError.response?.data?.message) {
+      return rejectWithValue(typedError.response.data.message);
+    } else if (typedError.message) {
+      return rejectWithValue(typedError.message);
+    } else {
+      return rejectWithValue('Failed to refresh user.');
+    }
+  }
+});

@@ -2,6 +2,8 @@ from fastapi import HTTPException
 from passlib.context import CryptContext
 from utils.jwt_token import decode_access_token
 from temp_storage import temp_storage
+import bcrypt
+print(bcrypt.__version__)
 
 def serialize_user(user) -> dict:
     user["_id"] = str(user["_id"])

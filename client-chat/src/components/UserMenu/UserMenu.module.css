@@ -2,8 +2,37 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 12px;
 }
 
 .username {
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+.button_out {
+  all: unset;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  border: 0.5px solid var(--primary-border-color);
+  border-radius: 12px;
+  opacity: 0.7;
+  transition:
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s ease,
+    color 0.3s ease,
+    fill 0.3s ease;
+  cursor: pointer;
+}
+
+.button_out:hover,
+.button_out:focus {
+  opacity: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--active-button-background);
+  color: var(--primary-text-color);
 }

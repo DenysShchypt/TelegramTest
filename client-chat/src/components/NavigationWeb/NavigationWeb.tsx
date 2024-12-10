@@ -7,13 +7,23 @@ const NavigationWeb: FC = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <nav>
-      <NavLink className={styles.link} to="/">
+    <nav className={styles.nav_wrap}>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? `${styles.link} ${styles.active}` : styles.link
+        }
+        to="/"
+      >
         Home
       </NavLink>
       {isLoggedIn && (
-        <NavLink className={styles.link} to="/tasks">
-          Tasks
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+          to="/chats"
+        >
+          Chats
         </NavLink>
       )}
     </nav>

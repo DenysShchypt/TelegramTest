@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
-// import { useAppDispatch } from "../utils/hooks/redux-hooks";
+import React, { FC, useEffect } from 'react';
+import { useAppDispatch } from '../utils/hooks/redux-hooks';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import { PrivateRoute } from '../routes/PrivateRouter';
 import { PublicRoute } from '../routes/PublicRoute';
+import { refreshUser } from '../redux/auth/auth.thunks';
+import { useAuth } from '../utils/hooks/useAuth';
 
 const AuthPage = React.lazy(() => import('../pages/Auth/Auth'));
 const HomePage = React.lazy(() => import('../pages/Home/Home'));
@@ -12,22 +14,16 @@ const ErrorPageComponent = React.lazy(
   () => import('../pages/ErrorPage/ErrorPage')
 );
 const App: FC = () => {
-  // const dispatch = useAppDispatch();
-  // const [isLoading, setIsLoading] = useState(true);
-  // useEffect(() => {
-  //   // const checkUser = async () => {
-  //   //   await dispatch(checkCurrentUser());
-  //   setIsLoading(false);
-  //   // };
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAuth();
 
-  //   // checkUser();
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  return (
+  return isLoading ? (
+    <b>Refreshing user...</b>
+  ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />

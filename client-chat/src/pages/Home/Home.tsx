@@ -1,9 +1,10 @@
 import { FC } from 'react';
+import styles from './Home.module.css';
 
 const Home: FC = () => {
   return (
-    <div>
-      <h1>Welcome to telegram chats👋</h1>
+    <div className={styles.home_wrap}>
+      <h1 className={styles.home_tittle}>Welcome to telegram chats📱</h1>
     </div>
   );
 };

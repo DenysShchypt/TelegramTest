@@ -4,11 +4,21 @@ import { NavLink } from 'react-router-dom';
 
 const AuthNav: FC = () => {
   return (
-    <div>
-      <NavLink className={styles.link} to="/register">
+    <div className={styles.nav_wrap}>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? `${styles.link} ${styles.active}` : styles.link
+        }
+        to="/register"
+      >
         Register
       </NavLink>
-      <NavLink className={styles.link} to="/login">
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? `${styles.link} ${styles.active}` : styles.link
+        }
+        to="/login"
+      >
         Log In
       </NavLink>
     </div>

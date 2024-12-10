@@ -1,5 +1,5 @@
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
-import { NavigateFunction } from "react-router-dom";
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { NavigateFunction } from 'react-router-dom';
 
 export interface IAuthState {
   user: IPublicUser | null;
@@ -28,7 +28,7 @@ export interface IPropsLogin<TFieldValues extends IFormData = IFormData> {
   errors: FieldErrors<TFieldValues>;
 }
 export interface IPropsRegister<
-  TFieldValues extends IFormDataRegister = IFormDataRegister
+  TFieldValues extends IFormDataRegister = IFormDataRegister,
 > {
   register: UseFormRegister<IFormDataRegister | IFormData>;
   navigate: NavigateFunction;

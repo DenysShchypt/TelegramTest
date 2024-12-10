@@ -10,8 +10,12 @@ const UserMenu: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.username}>Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logout())}>
+      <p className={styles.username}>Welcome, {user.username}👋</p>
+      <button
+        type="button"
+        className={styles.button_out}
+        onClick={() => dispatch(logout())}
+      >
         Logout
       </button>
     </div>
