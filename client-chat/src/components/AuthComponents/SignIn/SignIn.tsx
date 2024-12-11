@@ -49,9 +49,6 @@ const SignIn: FC<IPropsLogin> = (props: IPropsLogin) => {
         LOGIN
       </button>
       <div className={styles.forgot_password_wrap}>
-        <button type="button" className={styles.auxiliary_button}>
-          Forgot Password?
-        </button>
         <div className={styles.auxiliary_button}>
           <VscSignIn size={20} className={styles.auxiliary_icon} />
           <button

@@ -1,6 +1,6 @@
 // types/vite-plugin-eslint.d.ts
-declare module "vite-plugin-eslint" {
-  import { Plugin } from "vite";
+declare module 'vite-plugin-eslint' {
+  import { Plugin } from 'vite';
 
   interface EslintPluginOptions {
     include?: string[]; // Specify types as needed

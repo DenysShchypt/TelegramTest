@@ -12,7 +12,7 @@ const initialState: ITelegramData = {
   chats: [],
   messages: [],
   isLoading: false,
-  isConnect: false,
+  isConnect: localStorage.getItem('telegram'),
   isConfirmCode: false,
 };
 
@@ -38,7 +38,7 @@ const telegramSlice = createSlice({
       .addCase(confirmCode.pending, handlePending)
       .addCase(confirmCode.fulfilled, (state) => {
         state.isLoading = false;
-        state.isConnect = true;
+        state.isConnect = localStorage.getItem('telegram');
       })
       .addCase(confirmCode.rejected, handleRejected)
       .addCase(getChats.pending, handlePending)
@@ -56,7 +56,7 @@ const telegramSlice = createSlice({
       .addCase(disconnectChats.pending, handlePending)
       .addCase(disconnectChats.fulfilled, (state) => {
         state.isLoading = false;
-        state.isConnect = false;
+        state.isConnect = null;
         state.isConfirmCode = false;
       })
       .addCase(disconnectChats.rejected, handleRejected);

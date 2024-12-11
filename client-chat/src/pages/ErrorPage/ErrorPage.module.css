@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light");
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
 html {
   font-size: 16px;
-  font-family: "Shadows Into Light", cursive;
+  font-family: 'Shadows Into Light', cursive;
 }
 body {
   height: 100vh;
@@ -40,7 +40,7 @@ body {
 .m_ear {
   height: 14vh;
   width: 10vh;
-  border-radius: 40% 70% 10% 10% e("/") 100% 100% 10% 10%;
+  border-radius: 40% 70% 10% 10% e('/') 100% 100% 10% 10%;
   position: relative;
 
   &._left {
@@ -51,7 +51,7 @@ body {
   }
   &:after,
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     width: 2px;
     background-color: var(--secondary-background-color);
@@ -88,7 +88,7 @@ body {
   position: relative;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     height: 50%;
     left: -2vh;
@@ -99,7 +99,7 @@ body {
     animation: eyes 5s ease infinite;
   }
   &:after {
-    content: "";
+    content: '';
     width: 10%;
     height: 15%;
     border-radius: 50%;
@@ -128,7 +128,7 @@ body {
   }
 
   &:after {
-    content: "";
+    content: '';
     background-color: var(--main-text-white);
     width: 20%;
     left: 20%;
@@ -136,7 +136,7 @@ body {
 }
 
 .m_nose {
-  border-radius: 50% 50% 50% 50% e("/") 30% 30% 70% 70%;
+  border-radius: 50% 50% 50% 50% e('/') 30% 30% 70% 70%;
   background-color: var(--main-text-white);
   width: 4vh;
   height: 2vh;

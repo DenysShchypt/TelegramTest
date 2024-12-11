@@ -35,6 +35,7 @@ export const confirmCode = createAsyncThunk<
 >('telegram/confirm-code', async (data: IConfirmCode, { rejectWithValue }) => {
   try {
     const res = await instance.post('telegram/confirm-code', data);
+    localStorage.setItem('telegram', 'success');
     return res.data.message;
   } catch (error) {
     const typedError = error as IError;
@@ -95,6 +96,7 @@ export const disconnectChats = createAsyncThunk<
 >('telegram/logout-telegram', async (_, { rejectWithValue }) => {
   try {
     await instance.post(`telegram/logout-telegram`);
+    localStorage.setItem('telegram', '');
     return;
   } catch (error) {
     const typedError = error as IError;

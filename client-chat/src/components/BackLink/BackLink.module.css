@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 0;
+  padding: 8px 16px;
   color: var(--main-text-black);
   text-decoration: none;
   font-weight: 500;

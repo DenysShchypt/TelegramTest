@@ -57,6 +57,7 @@ export const loginUser = createAsyncThunk<
     }
   }
 });
+
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
   'users/logout',
   async (_, { rejectWithValue }) => {
@@ -80,7 +81,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
 );
 
 export const refreshUser = createAsyncThunk<
-  void,
+  IPublicUser,
   void,
   { rejectValue: string }
 >('users/refresh', async (_, { rejectWithValue }) => {
@@ -90,9 +91,8 @@ export const refreshUser = createAsyncThunk<
       return rejectWithValue('No token found. Please log in.');
     }
     setAuthHeader(token);
-    return;
-    // const res = await instance.get('/users/me');
-    // return res.data.user;
+    const res = await instance.get('users/refresh');
+    return res.data.user;
   } catch (error) {
     const typedError = error as IError;
 

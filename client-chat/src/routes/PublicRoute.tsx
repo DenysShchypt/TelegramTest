@@ -1,7 +1,7 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
-import React, { ReactElement } from "react";
-import { useAuth } from "../utils/hooks/useAuth";
+import React, { ReactElement } from 'react';
+import { useAuth } from '../utils/hooks/useAuth';
 
 interface PropTypes {
   component: ReactElement;
@@ -10,7 +10,7 @@ interface PropTypes {
 
 export const PublicRoute: React.FC<PropTypes> = ({
   component: Component,
-  redirectTo = "/",
+  redirectTo = '/',
 }) => {
   const { isLoggedIn } = useAuth();
 

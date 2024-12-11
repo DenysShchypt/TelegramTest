@@ -1,5 +1,5 @@
-import * as yup from "yup";
-import AppError from "../../common/errors";
+import * as yup from 'yup';
+import AppError from '../../common/errors';
 
 export interface ILoginFormValues {
   email: string;
@@ -15,7 +15,7 @@ export interface IRegisterFormValues {
 const LoginSchema: yup.ObjectSchema<ILoginFormValues> = yup.object().shape({
   email: yup
     .string()
-    .email("Email must be valid")
+    .email('Email must be valid')
     .required(AppError.Required_email),
   password: yup
     .string()

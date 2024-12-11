@@ -1,8 +1,16 @@
 from fastapi import HTTPException
+from bson import ObjectId
 from utils.helpers import hash_password,serialize_user,verify_password
 from utils.jwt_token import create_access_token,decode_access_token
 from database import users_collection
 from temp_storage import temp_storage
+import logging
+logger = logging.getLogger("fastapi_logger")
+logger.setLevel(logging.INFO)
+handler = logging.StreamHandler()
+formatter = logging.Formatter("[%(asctime)s] %(levelname)s: %(message)s")
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 async def register_user(user):
     existing_user = await users_collection.find_one({"email": user.email})
     if existing_user:
@@ -35,6 +43,24 @@ async def login_user(user):
     del db_user["password"]
 
     return {"user": serialize_user(db_user), "access_token": access_token}
+
+async def get_user_by_token(authorization: str):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=400, detail="Authorization header missing or invalid")
+    
+    access_token = authorization.split(" ")[1]
+
+    try:
+        decoded_token = decode_access_token(access_token)
+        user_id = decoded_token.get("user_id")
+        db_user = await users_collection.find_one({"_id": ObjectId(user_id)})
+        if not db_user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        del db_user["password"]
+        return {"user": serialize_user(db_user)}
+    except HTTPException as e:
+        raise e
 
 def logout_user_service(authorization: str):
     if not authorization or not authorization.startswith("Bearer "):

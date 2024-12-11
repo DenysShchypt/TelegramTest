@@ -9,7 +9,7 @@ export interface ITelegramData {
   chats: ReadonlyArray<IChat>;
   messages: ReadonlyArray<IMessage>;
   isLoading: boolean;
-  isConnect: boolean;
+  isConnect: string | null;
   isConfirmCode: boolean;
 }
 
